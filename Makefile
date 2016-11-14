@@ -12,6 +12,7 @@ pba/bin/libpba.so: pba
 
 pba: pba_v1.0.5.zip
 	unzip $<
+	sed -i 's/NVCC_FLAGS = -I$$(CUDA_INC_PATH) -O2 -Xcompiler -fPIC/NVCC_FLAGS = -D_FORCE_INLINES -I$$(CUDA_INC_PATH) -O2 -Xcompiler -fPIC/g' pba/makefile
 
 pba_v1.0.5.zip:
 	wget http://grail.cs.washington.edu/projects/mcba/pba_v1.0.5.zip
