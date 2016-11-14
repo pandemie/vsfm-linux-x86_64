@@ -4,11 +4,11 @@ all: vsfm/bin/VisualSFM vsfm/bin/libsiftgpu.so vsfm/bin/libpba.so
 run: all
 	LD_LIBRARY_PATH=./vsfm/bin:$$LD_LIBRARY_PATH vsfm/bin/VisualSFM
 
-vsfm/bin/libpba.so: pba/bin/libpba_no_gpu.so
+vsfm/bin/libpba.so: pba/bin/libpba.so
 	ln -s ../../$< $@
 
-pba/bin/libpba_no_gpu.so: pba
-	cd $< && mv makefile makefile_orig; mv makefile_no_gpu makefile; make
+pba/bin/libpba.so: pba
+	cd $< && make -f makefile -j 8
 
 pba: pba_v1.0.5.zip
 	unzip $<
